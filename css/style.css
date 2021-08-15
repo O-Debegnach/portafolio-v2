@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #0e0e0e;
+}
+
+div.video-bg > video{
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    float: left;
+    opacity: 0.2;
+}
+
+div.video-bg::before{
+    content: '';
+    background: url(../img/bg-lines.png) center;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
