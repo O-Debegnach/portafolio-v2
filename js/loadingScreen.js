@@ -9,9 +9,13 @@ var Loading = (loadingDelayHidden = 0) => {
     const myLoadingDelayHidden = loadingDelayHidden;
     // Imágenes
     let imgs = [];
-    let lenImgs = 0;
-    let counterImgsLoading = 0;
 
+    // Videos
+    let vids = [];
+
+    // Elementos totales
+    let counterElemsLoading = 0;
+    let lenTotal = 0
     //-----------------------------------------------------
     // Funciones
     //-----------------------------------------------------
@@ -19,10 +23,14 @@ var Loading = (loadingDelayHidden = 0) => {
     /**
      * Método que aumenta el contador de las imágenes cargadas
      */
-    function incrementCounterImgs() {
-        counterImgsLoading += 1;
+    function incrementCounterElems() {
+        counterElemsLoading += 1;
+        console.log('Conteo: ' + counterElemsLoading)
         // Comprueba si todas las imágenes están cargadas
-        if (counterImgsLoading === lenImgs) hideLoading();
+        if (counterElemsLoading >= lenTotal){
+             hideLoading();
+             console.log('Pantalla de carga escondida');
+        }
     }
 
     /**
@@ -50,19 +58,32 @@ var Loading = (loadingDelayHidden = 0) => {
         document.addEventListener('DOMContentLoaded', function () {
             loading = document.querySelector('.loading');
             imgs = Array.from(document.images);
-            lenImgs = imgs.length;
-
-            /* Comprobar que todas las imágenes estén cargadas */
-            if(imgs.length === 0) {
-                // No hay ninguna
+            console.log(imgs);
+            vids = Array.from(document.getElementsByTagName('video'));
+            console.log(vids);
+            lenTotal = imgs.length + vids.length;
+            console.log('Conteo total: ' + lenTotal);
+            /* Comprobar que todos los elementos estén cargados */
+            if(lenTotal = 0){
                 hideLoading();
-            } else {
-                // Una o más
+                return;
+            }
+            if(imgs.length > 0) {
                 imgs.forEach(function (img) {
                     // A cada una le añade un evento que cuando se carge la imagen llame a la funcion incrementCounterImgs
-                    img.addEventListener('load', incrementCounterImgs, false);
+                    img.addEventListener('load', incrementCounterElems, false);
                 });
             }
+            if(vids.length > 0){
+                vids.forEach(function (vid) {
+                    // vid.addEventListener('canplaythrough', incrementCounterElems, false)
+                    vid.oncanplay = function() {
+                        console.log('Video cargado');
+                        incrementCounterElems();
+                    };
+                });
+            }
+            
         });
     }
 
