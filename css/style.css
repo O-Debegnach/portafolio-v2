@@ -10,8 +10,8 @@
 }
 
 :root{
-    --primary-font: normal 800 1rem/1.1rem 'Poppins';
-    --secondary-font: normal 800 .7rem/1rem 'Atkinson';
+    --primary-font-family: 'Poppins';
+    --secondary-font-family: 'Atkinson';
 }
 
 /*Cuerpo en general*/
@@ -19,20 +19,19 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font: var(--primary-font);
+    font-family: var(--primary-font-family);
     outline: none!important;
-    font-size: 2.5rem;
 }
 
 body{
     background-color: #0e0e0e;
-    height: 200vh;
 }
 
 /*Header*/
 header{
     display: flex;
     height: 100vh;
+    overflow: hidden;
 }
 
 div.video-bg > video{
@@ -58,23 +57,60 @@ div.video-bg::before{
 /* Titulo */
 header .title-container{
     position: relative;
+    align-self: center;
+    height: fit-content;
     z-index: 3;
     padding: 0 10%;
     font-weight: 800;
 }
 
 header .title-container h1 {
-    align-self: center;
     font-weight: 800;
     font-size: 10vw;
     color: #fff;
-    line-height: 1;
+    line-height: 1.2;
     text-transform: uppercase;
 }
 
+header .title-container h1::first-line {
+    line-height: .8;
+}
+
 header .title-container p{
-    font: var(--primary-font);
+    font: var(--secondary-font-family);
     font-size: 20px;
     text-indent: 5px;
     color: #01f7b6;
+}
+
+/*Links contacto*/
+header .left-side {
+    width: 100vh;
+    height: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform-origin: right top;
+    -o-transform: rotate(-90deg) translateY(-100vh);
+    -webkit-transform: rotate(-90deg) translateY(-100vh);
+    transform: rotate(-90deg) translateY(-100vh);
+    z-index: 3;
+}
+
+header .left-side ul li {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 0;
+    list-style: none;
+}
+
+header .left-side ul li a{
+    color: white;
+    text-decoration: underline transparent;
+    text-underline-offset: 10px;
+    font-size: 20px;
 }
